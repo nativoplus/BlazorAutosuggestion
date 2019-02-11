@@ -1,0 +1,18 @@
+﻿@using NativoPlusBlazor.App.Services
+@using NativoPlus.ComponentLibrary.AutoCompleteComponent
+@page "/fetchdata"
+@inject WeatherForecastService ForecastService
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+<AutoCompleteComponent/>
+
+@functions {
+    WeatherForecast[] forecasts;
+
+    protected override async Task OnInitAsync()
+    {
+        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+    }
+}
