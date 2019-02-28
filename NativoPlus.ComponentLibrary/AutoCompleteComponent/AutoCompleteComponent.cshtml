@@ -45,30 +45,31 @@
 
     public async Task TryAutoComplete(UIFocusEventArgs ev)
     {
-        //    if (string.IsNullOrWhiteSpace(Term))
-        //    {
-        //        SuggestionList.Clear();
-        //        _isOpen = false;
-        //        return;
-        //    }
+        if (string.IsNullOrWhiteSpace(Term))
+        {
+            SuggestionList.Clear();
+            _isOpen = false;
+            return;
+        }
 
-        //    if (Term.Length < CharLimit)
-        //    {
-        //        return;
-        //    }
-        //    SuggestionList.Clear();
-        //    var request = new SuggestionRequest { Term = Term };
-
-
-        //    var result = await _client.PostAsJsonAsync<SuggestionRequest>
-        //(Url, request);
+        if (Term.Length < CharLimit)
+        {
+            return;
+        }
+        SuggestionList.Clear();
+        var request = new SuggestionRequest { Term = Term };
 
 
-        //    var SuggestionContent = await result.Content.ReadAsStringAsync();
+        // var result = await _client.PostAsJsonAsync<SuggestionRequest>(Url, request);
 
-        //    SuggestionList = JsonConvert.DeserializeObject<List<SuggestionResponse>>(SuggestionContent);
 
-            _isOpen = SuggestionList.Count > 0;
+        //var SuggestionContent = await result.Content.ReadAsStringAsync();
+
+        //SuggestionList = JsonConvert.DeserializeObject<List<SuggestionResponse>>(SuggestionContent);
+
+        //We will ask for the list
+
+        _isOpen = SuggestionList.Count > 0;
 
         this.StateHasChanged();
     }

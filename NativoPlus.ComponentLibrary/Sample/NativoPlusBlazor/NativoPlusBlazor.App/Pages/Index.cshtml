@@ -1,7 +1,22 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
+@functions{
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+
+    protected void WhenSwipedRight()
+    {
+        Console.WriteLine("Index: You swiped to the right my friend.");
+    }
+
+    protected void WhenSwipedLeft()
+    {
+        Console.WriteLine("Index: You swiped to the left my friend.");
+    }
+
+}
+<SwipeContainerComponent OnSwipeLeft="@WhenSwipedLeft" OnSwipeRight="@WhenSwipedRight">
+    <h1 id="title">Hello, world!</h1>
+
+    Welcome to your new app.
+</SwipeContainerComponent>

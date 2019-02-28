@@ -1,0 +1,63 @@
+﻿@using Microsoft.JSInterop;
+@inject IJSRuntime JsRuntime
+@inherits SwipeContainerClass
+
+@functions{
+    [Parameter]  Action OnSwipeRight { get; set; }
+    [Parameter] Action OnSwipeLeft { get; set; }
+    [Parameter]
+    private RenderFragment ChildContent { get; set; }
+
+
+
+    protected override async Task OnAfterRenderAsync()
+    {
+        await JSRuntime.Current.InvokeAsync<string>("swiper.swiperinit",
+            new DotNetObjectRef(new SwipeContainerComponent()));
+
+    }
+    [JSInvokable]
+    public void SwipedRight()
+    {
+        this.OnSwipeRight();
+    }
+
+    [JSInvokable]
+    public void SwipedLeft()
+    {
+        OnSwipeLeft();
+    }
+
+
+
+
+    [JSInvokable]
+    public static Task SwipeRight()
+    {
+
+
+
+        return JSRuntime.Current.InvokeAsync<object>("swiper.SwipedRight" ,
+            new DotNetObjectRef(new SwipeContainerComponent()));
+
+    }
+
+    [JSInvokable]
+    public static async Task SwipeLeft()
+    {
+
+        Console.WriteLine("Swiped Left");
+        return;
+    }
+
+
+
+
+
+    }
+
+
+<div id="swipeContainer">
+    <h1 id="swipetext">test</h1>
+    @ChildContent
+</div>

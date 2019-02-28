@@ -17,6 +17,10 @@ namespace NativoPlus.ComponentLibrary.AutoCompleteComponent
     //    protected string Term { get; set; } = String.Empty;
         protected bool _isOpen { get; set; } = false;
         protected IList<SuggestionResponse> SuggestionList { get; set; } = new List<SuggestionResponse>() { new SuggestionResponse {Suggestion = "Alaska" }, new SuggestionResponse { Suggestion = "Puerto Rico" } };
+
+        [Parameter]
+        protected IList<string> Suggestions { get; set; } = new List<string>();
+
         [Parameter]
         protected string SelectedValue { get; set; } = String.Empty;
 
