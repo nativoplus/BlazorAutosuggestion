@@ -2,23 +2,50 @@
     swiperinit: function () {
 
 
+
+
+     
+     
+        
+
+
         $(document).ready(function (obj) {
             // Bind the swiperightHandler callback function to the swipe event on div.box
-            $("#swipetext").on("swiperight", swiperightHandler);
+            //$("#swipeContainer").on("swiperight", _.throttle(swiperightHandler, 200));
 
-            $("#swipetext").on("swipeleft", swiperleftHandler);
+            //$("#swipeContainer").on("swipeleft", _.throttle(swiperleftHandler, 200));
+
+            $("#swipeContainer").on('swipeleft', _.throttle(function (event, data) {
+
+                event.stopImmediatePropagation();
+                swipeleftHandler();
+            
+            }, 200));
+
+            $("#swipeContainer").on('swiperight', _.throttle(function (event, data) {
+
+                event.stopImmediatePropagation();
+                swiperightHandler();
+           
+            }, 200));
 
             // Callback function references the event target and adds the 'swiperight' class to it
             async function swiperightHandler() {
-                await DotNet.invokeMethodAsync('NativoPlus.ComponentLibrary', 'SwipeRight');
+      
+                $("#swipeRightBtn").trigger("click");
+                //await DotNet.invokeMethodAsync('NativoPlus.ComponentLibrary', 'SwipeRight');
                
                
             }
 
-            async function swiperleftHandler(event) {
-                await DotNet.invokeMethodAsync('NativoPlus.ComponentLibrary', 'SwipeLeft');
+            async function swipeleftHandler() {
+           
+                $("#swipeLeftBtn").trigger("click");
+                //await DotNet.invokeMethodAsync('NativoPlus.ComponentLibrary', 'SwipeLeft');
              
             }
+
+      
         });
 
 

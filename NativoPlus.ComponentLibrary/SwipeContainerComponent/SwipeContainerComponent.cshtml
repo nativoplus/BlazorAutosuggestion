@@ -8,7 +8,7 @@
     [Parameter]
     private RenderFragment ChildContent { get; set; }
 
-
+   
 
     protected override async Task OnAfterRenderAsync()
     {
@@ -16,13 +16,14 @@
             new DotNetObjectRef(new SwipeContainerComponent()));
 
     }
-    [JSInvokable]
+   
     public void SwipedRight()
     {
+        Console.WriteLine("Swiped Right");
         this.OnSwipeRight();
     }
 
-    [JSInvokable]
+   
     public void SwipedLeft()
     {
         OnSwipeLeft();
@@ -58,6 +59,7 @@
 
 
 <div id="swipeContainer">
-    <h1 id="swipetext">test</h1>
+    <button id="swipeLeftBtn" onclick="@OnSwipeLeft" style="display:none;"></button>
+    <button id="swipeRightBtn" onclick="@OnSwipeRight" style="display:none;"></button>
     @ChildContent
 </div>
