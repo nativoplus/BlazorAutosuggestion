@@ -2,6 +2,27 @@
 
 
 @functions{
+    string Term { get; set; }
+    List<String> suggestions { get; set; } = new List<String>();
+
+    protected void GetSu(String term)
+    {
+        Term = term;
+        suggestions.Add("Cars");
+        suggestions.Add("Hola");
+        suggestions.Add("Nativo Plus");
+        StateHasChanged();
+
+    }
+
+    protected void selection(String term)
+    {
+        Term = term;
+        Console.WriteLine(term);
+       
+
+    }
+
 
 
     protected void WhenSwipedRight()
@@ -14,9 +35,25 @@
         Console.WriteLine("Index: You swiped to the left my friend.");
     }
 
-}
+    }
 <SwipeContainerComponent OnSwipeLeft="@WhenSwipedLeft" OnSwipeRight="@WhenSwipedRight">
-    <h1 id="title">Hello, world!</h1>
+    <h1 id="title">Hello, @Term!</h1>
 
     Welcome to your new app.
 </SwipeContainerComponent>
+
+<div class="row">
+    <div class="col-sm-12">
+        <AutoComplete SearchTerm="@Term" Suggestions="@suggestions" SuggestionSelected="@selection" AskForSuggestions="@GetSu" />
+    </div>
+</div>
+
+<h1 id="title">Hello, world!</h1>
+
+    Welcome to your new app.
+<h1 id="title">Hello, world!</h1>
+
+    Welcome to your new app.
+<h1 id="title">Hello, world!</h1>
+
+    Welcome to your new app.

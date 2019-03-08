@@ -1,0 +1,134 @@
+﻿
+@functions{ 
+    [Parameter]
+    protected String SearchTerm { get; set; }
+    bool _isOpen { get; set; } = false;
+    [Parameter]
+    protected List<String> Suggestions { get; set; } = new List<String>();
+    [Parameter] protected Action<String> SuggestionSelected { get; set; }
+    [Parameter] protected Action<String> AskForSuggestions { get; set; }
+    //Char limit needed to trigger the auto complete
+    [Parameter] protected int CharLimit { get; set; } = 3;
+    [Parameter] protected string style { get; set; } = "";
+
+
+    //Define colors
+    [Parameter] protected string PrimaryColor { get; set; } = "#1aa8de";
+
+
+
+    protected override void OnParametersSet()
+    {
+        _isOpen = Suggestions.Count > 0;
+
+    }
+
+    protected void GetSuggestion()
+    {
+        if (string.IsNullOrWhiteSpace(SearchTerm))
+        {
+            Suggestions.Clear();
+            _isOpen = false;
+            return;
+        }
+
+        if (SearchTerm.Length < CharLimit)
+        {
+            return;
+        }
+        Suggestions.Clear();
+        AskForSuggestions(SearchTerm);
+
+        //_isOpen = Suggestions.Count > 0;
+
+        this.StateHasChanged();
+
+    }
+
+    void SelectionMade(String selection)
+    {
+        _isOpen = false;
+        SearchTerm = selection;
+        SuggestionSelected(SearchTerm);
+        this.StateHasChanged();
+
+
+    }
+
+
+
+        }
+
+
+<style>
+
+
+
+    .input-term {
+        border-radius: 6px;
+        border: 1px solid #a7a7a7;
+    }
+
+        .input-term:focus {
+            box-shadow: 0 0 10px rgba(81, 203, 238, 1);
+            border: 1px solid rgba(81, 203, 238, 1);
+        }
+
+    .hide {
+        display: none;
+    }
+
+    .suggestions {
+        background: white;
+        position: absolute;
+        z-index: 5;
+        width: min-content;
+        min-width: 200px;
+        margin-top: 10px;
+        border-radius: 8px;
+    }
+
+    .suggestions-ul {
+        border-radius: 6px;
+        list-style-type: none;
+        padding: 0px;
+        box-shadow: 0 0 10px rgba(177, 177, 177, 1);
+    }
+
+    .suggestions-li {
+        cursor: pointer;
+        width: 100%;
+        border-radius: 6px;
+        background: white;
+        margin: 0px;
+        padding: 10px;
+    }
+
+        .suggestions-li:hover {
+            background: *#1ec1ff;
+            color: white;
+        }
+
+        .suggestions-li:active {
+            background: @PrimaryColor ; /*#1aa8de;*/
+            color: white;
+        }
+
+</style>
+
+<section>
+   
+
+        <input class="input-term @style"  bind="@SearchTerm"  oninput="this.blur(); this.focus();" onblur="@(ev => GetSuggestion())" /><i class="fas fa-times"></i>
+        <div class="suggestions @(_isOpen ? "" : "hide")">
+            <ul class="suggestions-ul">
+                @foreach (var suggestion in Suggestions)
+        {
+                    <li class="suggestions-li" onclick="@(()=> SelectionMade(suggestion))">@suggestion</li>
+    }
+
+               
+            </ul>
+        </div>
+    
+</section>

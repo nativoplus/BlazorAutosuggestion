@@ -1,0 +1,49 @@
+﻿
+.input-term {
+    border-radius: 6px;
+    border: 1px solid black;
+}
+
+    .input-term:focus {
+        box-shadow: 0 0 10px rgba(81, 203, 238, 1);
+        border: 1px solid rgba(81, 203, 238, 1);
+    }
+
+    .hide{
+        display:none;
+    }
+
+.suggestions {
+    background: white;
+    position: absolute;
+    z-index: 5;
+    width: min-content;
+    min-width: 200px;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+.suggestions-ul {
+    border-radius: 6px;
+    list-style-type: none;
+    padding: 0px;
+    box-shadow: 0 0 10px rgba(177, 177, 177, 1);
+}
+
+.suggestions-li {
+    cursor:pointer;
+    width: 100%;
+    border-radius: 6px;
+    background: white;
+    margin: 0px;
+    padding: 10px;
+}
+
+    .suggestions-li:hover {
+        background: #1ec1ff;
+        color:white;
+    }
+
+    .suggestions-li:active {
+        background: #1aa8de;
+        color: white;
+    }

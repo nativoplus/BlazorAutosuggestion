@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="content\AutoComplete.css" />
     <None Remove="content\JsInterop\SwipeContainer\swipeInterop.js" />
   </ItemGroup>
 
