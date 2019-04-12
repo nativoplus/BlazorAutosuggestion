@@ -64,15 +64,7 @@
 
 
 
-    .input-term {
-        border-radius: 6px;
-        border: 1px solid #a7a7a7;
-    }
 
-        .input-term:focus {
-            box-shadow: 0 0 10px rgba(81, 203, 238, 1);
-            border: 1px solid rgba(81, 203, 238, 1);
-        }
 
     .hide {
         display: none;
@@ -82,17 +74,12 @@
         background: white;
         position: absolute;
         z-index: 5;
-        width: min-content;
-        min-width: 200px;
-        margin-top: 10px;
-        border-radius: 8px;
+        width: inherit;
     }
 
     .suggestions-ul {
-        border-radius: 6px;
         list-style-type: none;
-        padding: 0px;
-        box-shadow: 0 0 10px rgba(177, 177, 177, 1);
+
     }
 
     .suggestions-li {
@@ -105,7 +92,7 @@
     }
 
         .suggestions-li:hover {
-            background: *#1ec1ff;
+            background: #1ec1ff;
             color: white;
         }
 
@@ -114,17 +101,23 @@
             color: white;
         }
 
+    .text-omiter {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 </style>
 
-<section>
+<section style="width:100%;">
    
 
-        <input class="input-term @style"  bind="@SearchTerm"  oninput="this.blur(); this.focus();" onblur="@(ev => GetSuggestion())" /><i class="fas fa-times"></i>
-        <div class="suggestions @(_isOpen ? "" : "hide")">
-            <ul class="suggestions-ul">
+        <input class=" @style"  bind="@SearchTerm"  oninput="this.blur(); this.focus();" onblur="@(ev => GetSuggestion())"  style="width:inherit;"/>
+        <div class="suggestions mt-2 shadow rounded-lg @(_isOpen ? "" : "hide")">
+            <ul class="suggestions-ul rounded p-0 m-0 rounded-lg">
                 @foreach (var suggestion in Suggestions)
         {
-                    <li class="suggestions-li" onclick="@(()=> SelectionMade(suggestion))">@suggestion</li>
+                    <li class="suggestions-li rounded" onclick="@(()=> SelectionMade(suggestion))">@suggestion</li>
     }
 
                

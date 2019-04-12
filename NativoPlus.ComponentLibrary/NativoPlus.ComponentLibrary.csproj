@@ -35,6 +35,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="AutoComplete.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.8.0-preview1-20181121.1" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.8.0-preview1-20181121.1" PrivateAssets="all" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
